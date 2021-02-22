@@ -16,7 +16,12 @@ pipeline {
         stage('build')
         {
             steps {
-                sh "/opt/maven/bin/mvn ${params.MAVENGOAL}"
+                sh '''
+                    export MAVEN_HOME=/opt/maven
+                    export PATH=$PATH:$MAVEN_HOME/bin
+                    mvn --version
+                '''
+                sh '"/opt/maven/bin/mvn" ${params.MAVENGOAL}'
             }
         }
         stage('post build')
@@ -34,8 +39,8 @@ pipeline {
     post {
         always {
             mail to: 'bandarupallirajesh3@gmail.com',
-                subject: "Status of Pipeline: ${currentBuild.fullDisplayName}",
-                body: "${env.BUILD_URL} has result ${currentBuild.result}"
+                subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+                body: "Something is wrong with ${env.BUILD_URL}"
         }
     }
 }
