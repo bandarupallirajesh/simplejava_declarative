@@ -18,7 +18,7 @@ pipeline {
                 '''
             }
         }
-        stage('post build)
+        stage('post build')
         {
             steps {
                 junit 'Sample-Declarative/target/surefire-reports/*.xml'
