@@ -16,7 +16,7 @@ pipeline {
         stage('build')
         {
             steps {
-                sh "echo ${params.MAVENGOAL}"
+                sh "/opt/maven/bin/mvn ${params.MAVENGOAL}"
             }
         }
         stage('post build')
