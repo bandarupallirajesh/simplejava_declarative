@@ -1,7 +1,7 @@
 pipeline {
     agent any
-    triggers{
-        cron(* * * * *)
+    triggers {
+        cron('* * * * *')
     }
     stages {
         stage('scm pull')
