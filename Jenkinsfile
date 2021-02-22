@@ -17,10 +17,6 @@ pipeline {
                     export MAVEN_HOME=/opt/maven
                     export PATH=$PATH:$MAVEN_HOME/bin
                     mvn --version
-                '''
-                sh script: '''
-                    export MAVEN_HOME=/opt/maven
-                    export PATH=$PATH:$MAVEN_HOME/bin 
                     mvn "${params.MAVENGOAL}"
                 '''
             }
