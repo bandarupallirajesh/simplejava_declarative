@@ -18,7 +18,11 @@ pipeline {
                     export PATH=$PATH:$MAVEN_HOME/bin
                     mvn --version
                 '''
-                sh script: "mvn ${params.MAVENGOAL}"
+                sh script: '''
+                    export MAVEN_HOME=/opt/maven
+                    export PATH=$PATH:$MAVEN_HOME/bin 
+                    mvn ${params.MAVENGOAL}
+                '''
             }
         }
         stage('post build')
