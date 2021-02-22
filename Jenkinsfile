@@ -21,7 +21,7 @@ pipeline {
                 sh script: '''
                     export MAVEN_HOME=/opt/maven
                     export PATH=$PATH:$MAVEN_HOME/bin 
-                    mvn ${params.MAVENGOAL}
+                    mvn "${params.MAVENGOAL}"
                 '''
             }
         }
