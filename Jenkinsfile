@@ -1,7 +1,10 @@
 pipeline {
     agent any
-    triggers {
-        cron('* * * * *')
+    triggers{
+        cron(* * * * *)
+    }
+    parameters {
+        string(name: 'mavengoal', defaultValue: 'clean package', description: 'it would clean and package the code')
     }
     stages {
         stage('scm pull')
@@ -17,15 +20,15 @@ pipeline {
                     export MAVEN_HOME=/opt/maven
                     export PATH=$PATH:$MAVEN_HOME/bin
                     mvn --version
-                    mvn clean package
+                    mvn ${params.mavengoal}"
                 '''
             }
         }
         stage('post build')
         {
             steps {
-                junit 'target/surefire-reports/*.xml'
-                archiveArtifacts 'target/*.jar'
+                junit 'Sample-Declarative/target/surefire-reports/*.xml'
+                archiveArtifacts 'Sample-Declarative/target/*.jar'
 
             }
         }
