@@ -13,8 +13,8 @@ pipeline {
         stage('build')
         {
             steps {
+		sh "echo ${params.MAVENGOAL}"
                 sh '''
-		    echo ${params.MAVENGOAL}	
                     export MAVEN_HOME=/opt/maven
                     export PATH=$PATH:$MAVEN_HOME/bin
                     mvn --version
