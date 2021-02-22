@@ -36,12 +36,12 @@ pipeline {
                 }
             }
             post {
-            always {
-                mail to: 'bandarupallirajesh3@gmail.com'
-                subject: 'Status of pipeline'
-                body: 'please check the result'
+                always {
+                    mail to: 'bandarupallirajesh3@gmail.com'
+                    subject: 'Status of pipeline'
+                    body: 'please check the result'
+                }
             }
-        }
         }
     }
 }
