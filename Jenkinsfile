@@ -24,8 +24,8 @@ pipeline {
         stage('post build')
         {
             steps {
-                junit 'Sample-Declarative/target/surefire-reports/*.xml'
-                archiveArtifacts 'Sample-Declarative/target/*.jar'
+                junit 'target/surefire-reports/*.xml'
+                archiveArtifacts 'target/*.jar'
 
             }
         }
