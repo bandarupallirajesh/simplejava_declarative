@@ -1,7 +1,7 @@
 pipeline {
     agent any
     triggers{
-        cron(* * * * *)
+        cron('* * * * *')
     }
     parameters {
         string(name: 'mavengoal', defaultValue: 'clean package', description: 'it would clean and package the code')
