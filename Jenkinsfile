@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters {
-        string(name: 'mavengoal', defaultValue: 'clean package', description: 'it would clean and package the code')
+        string(name: 'MAVENGOAL', defaultValue: 'clean package', description: 'it would clean and package the code')
     }
     stages {
         stage('scm pull')
@@ -17,7 +17,7 @@ pipeline {
                     export MAVEN_HOME=/opt/maven
                     export PATH=$PATH:$MAVEN_HOME/bin
                     mvn --version
-                    script: "mvn ${params.mavengoal}"
+                    script: "mvn ${params.MAVENGOAL}"
                 '''
             }
         }
