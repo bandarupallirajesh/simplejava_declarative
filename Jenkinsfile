@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    triggers{
-        cron('* * * * *')
-    }
     parameters {
         string(name: 'mavengoal', defaultValue: 'clean package', description: 'it would clean and package the code')
     }
@@ -20,7 +17,7 @@ pipeline {
                     export MAVEN_HOME=/opt/maven
                     export PATH=$PATH:$MAVEN_HOME/bin
                     mvn --version
-                    mvn ${params.mavengoal}"
+                    script: "mvn ${params.mavengoal}"
                 '''
             }
         }
