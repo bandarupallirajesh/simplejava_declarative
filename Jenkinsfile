@@ -3,6 +3,9 @@ pipeline {
     parameters {
         string(name: 'MAVENGOAL', defaultValue: 'clean package', description: 'it would clean and package the code')
     }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '3', artifactNumToKeepStr: '5'))
+    }
     stages {
         stage('scm pull')
         {
@@ -14,11 +17,12 @@ pipeline {
         {
             steps {
                 sh '''
+                    echo ${params.MAVENGOAL}
                     export MAVEN_HOME=/opt/maven
                     export PATH=$PATH:$MAVEN_HOME/bin
                     mvn --version
+                    mvn "${params.MAVENGOAL}"
                 '''
-		sh "'/opt/maven/bin/mvn' ${params.MAVENGOAL}"
             }
         }
         stage('post build')
@@ -26,7 +30,22 @@ pipeline {
             steps {
                 junit 'target/surefire-reports/*.xml'
                 archiveArtifacts 'target/*.jar'
-
+                stash includes: 'target/*.jar', name: 'samplejava'
+                dir('/opt/jars/'){
+                    unstash 'samplejava'
+                }
+            }
+        }
+        stage('send mail')
+        {
+            steps {
+                post {
+                    always {
+                        mail to: 'bandarupallirajesh3@gmail.com'
+                        subject: 'Status of pipeline'
+                        body: 'please check the result'
+                    }
+                }
             }
         }
     }
