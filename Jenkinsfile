@@ -40,8 +40,8 @@ pipeline {
     post {
         always {
             mail to: 'bandarupallirajesh3@gmail.com'
-            subject: 'Status of pipeline'
-            body: 'please check the result'
+                subject: 'Status of pipeline'
+                body: 'please check the result'
         }
     }
 }
