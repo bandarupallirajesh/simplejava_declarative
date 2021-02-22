@@ -22,7 +22,7 @@ pipeline {
         {
             steps {
                 junit 'Sample-Declarative/target/surefire-reports/*.xml'
-                archiveArtifactorys 'Sample-Declarative/target/*.jar'
+                archiveArtifacts 'Sample-Declarative/target/*.jar'
 
             }
         }
